@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg" >
+<head>
+<style>
+polygon {  fill-opacity:0.2; }
+polygon:hover { fill-opacity:1; }
+</style>
+
+<script>
+<![CDATA[
+var steps = 400;
+var step = 0;
+var el1, el2, el3;
+var anim_running = 0;
+var expand_curve_lock=0;
+
+function expand_box(){
+  if(expand_curve_lock>0){return;}
+  expand_curve_lock=100;
+  do_expand_box();
+}
+
+function expand_curve(){
+  if(expand_curve_lock>0){return;}
+  expand_curve_lock=100;
+  do_expand_curve();
+}
+function do_expand_box(){
+  el5 = document.getElementById('axis');
+  expand_curve_lock--;
+  if(expand_curve_lock < 0){
+    return;
+    expand_curve_lock=100;
+    anim_running = setTimeout("do_exp()",10);
+  } 
+  el5.setAttribute('transform',el5.getAttribute('transform') + " scale(1.00406,1.00406)");
+  anim_running = setTimeout("do_expand_box()",10);
+};
+function do_expand_curve(){
+  el3 = document.getElementById('group');
+  expand_curve_lock--;
+  if(expand_curve_lock < 0){
+    return;
+    expand_curve_lock=100;
+    anim_running = setTimeout("do_exp()",10);
+  } 
+  el3.setAttribute('transform',el3.getAttribute('transform') + " scale(1.00406,1.00406)");
+  anim_running = setTimeout("do_expand_curve()",10);
+};
+
+]]>
+</script>
+</head>
+<body onload="init();">
+  <button onclick="expand_curve();">Expand Curve</button>
+  <button onclick="expand_box();">Expand Box</button>
+  <div>
+
+
+  <svg:svg width="1200px" height="800px" viewBox="0 0 1200 800">
+    <svg:desc>Fake desc</svg:desc>
+    <svg:title>Fake title</svg:title>
+	  <svg:g id="group" transform="scale(1.0, 1.0)">
+      <svg:polygon id="baz" class="unit-cm" style="fill: blue; stroke: black;" 
+points="
+0.000,0.000 6.000,6.279 12.000,12.552 18.000,18.812 24.000,25.054 30.000,31.271 36.000,37.457 42.000,43.607 48.000,49.713 54.000,55.771 60.000,61.773 66.000,67.715 72.000,73.589 78.000,79.392 84.000,85.116 90.000,90.756 96.000,96.306 102.000,101.762 108.000,107.117 114.000,112.367 120.000,117.506 126.000,122.529 132.000,127.431 138.000,132.207 144.000,136.854 150.000,141.365 156.000,145.737 162.000,149.965 168.000,154.046 174.000,157.974 180.000,161.747 186.000,165.361 192.000,168.811 198.000,172.095 204.000,175.209 210.000,178.151 216.000,180.917 222.000,183.504 228.000,185.911 234.000,188.134 240.000,190.172 246.000,192.022 252.000,193.683 258.000,195.153 264.000,196.431 270.000,197.515 276.000,198.405 282.000,199.098 288.000,199.596 294.000,199.896 300.000,200.000 306.000,199.906 312.000,199.616 318.000,199.128 324.000,198.444 330.000,197.565 336.000,196.491 342.000,195.223 348.000,193.762 354.000,192.111 360.000,190.270 366.000,188.242 372.000,186.028 378.000,183.631 384.000,181.052 390.000,178.295 396.000,175.363 402.000,172.257 408.000,168.982 414.000,165.540 420.000,161.934 426.000,158.170 432.000,154.249 438.000,150.176 444.000,145.955 450.000,141.590 456.000,137.086 462.000,132.446 468.000,127.676 474.000,122.780 480.000,117.763 486.000,112.630 492.000,107.386 498.000,102.036 504.000,96.585 510.000,91.039 516.000,85.404 522.000,79.684 528.000,73.885 534.000,68.014 540.000,62.076 546.000,56.077 552.000,50.022 558.000,43.918 564.000,37.770 570.000,31.586 576.000,25.370 582.000,19.129 588.000,12.870 594.000,6.597 600,0"/>
+    </svg:g>
+	  <svg:g id='axis' viewBox="0 0 600 400" transform="scale(1.0,1.0)">
+      <svg:polygon id="bar" class="unit-cm" style="fill: blue; stroke: black;" points="30,100 200,100 200,300 30,300"/>
+    </svg:g>
+  </svg:svg>
+  </div>
+</body>
+</html>
