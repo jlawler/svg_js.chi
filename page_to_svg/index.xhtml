@@ -6,13 +6,12 @@
 
 <script>
 <![CDATA[
-function mo_magic(svg_text){
+function mo_magic(){
 //blatently stolen from http://jwatt.org/svg/demos/scripting-across-embed.html
   var embed = document.getElementById('embed');
   try {
     var svgdoc = embed.getSVGDocument();
-    var svgwin = svgdoc.defaultView;
-    svgwin.func_in_svg(svg_text);
+    return svgdoc.defaultView;
   }catch(exception) {
     alert('The GetSVGDocument interface is not supported' + exception);
   }
@@ -22,7 +21,8 @@ function mo_magic(svg_text){
 </script>
 </head>
 <body>
-  <button onclick="mo_magic('blah');">Magic</button>
+  <button onclick="mo_magic().func_in_svg('FOO');">FOO</button>
+  <button onclick="mo_magic().func_in_svg('BAR');">BAR</button>
   <div>
       <embed id="embed" src="api.svg" type="image/svg+xml" />
   </div>
