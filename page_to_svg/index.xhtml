@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html 
+  xmlns="http://www.w3.org/1999/xhtml" 
+  xmlns:svg="http://www.w3.org/2000/svg" >
+<head>
+
+<script>
+<![CDATA[
+function mo_magic(svg_text){
+//blatently stolen from http://jwatt.org/svg/demos/scripting-across-embed.html
+  var embed = document.getElementById('embed');
+  try {
+    var svgdoc = embed.getSVGDocument();
+    var svgwin = svgdoc.defaultView;
+    svgwin.func_in_svg(svg_text);
+  }catch(exception) {
+    alert('The GetSVGDocument interface is not supported' + exception);
+  }
+}
+
+]]>
+</script>
+</head>
+<body>
+  <button onclick="mo_magic('blah');">Magic</button>
+  <div>
+      <embed id="embed" src="simple.svg" type="image/svg+xml" />
+  </div>
+</body>
+</html>
