@@ -1,0 +1,247 @@
+<svg id='tle' width="1200px" height="800px" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" onmousedown="mousedown(evt);"  onmouseup="mouseup(evt);" version="1.1">
+    <desc>Fake desc</desc>
+    <title>Fake title</title>
+<defs>
+
+</defs>
+	  <polyline points="0,0 600,0 600,400 0,400 0,0" style="stroke: black;fill: white; fill-opacity: 0.2;"/>
+    <svg x='20' y='10'  viewBox="0 0 200 200"  width="200" height="200" fill='none'>
+    <g font-family="Verdana" font-size="15" >
+      <text x="0" y="20" fill="blue"  >
+        X:  <tspan id='xcd' font-weight="bold" fill="red" >not</tspan>  
+      </text>
+    </g>
+    </svg>
+    <svg x='220' y='10'  viewBox="0 0 200 200"  width="200" height="200" fill='none'>
+    <g font-family="Verdana" font-size="15" >
+      <text x="0" y="20" fill="blue"  >
+        Y:  <tspan id='ycd' font-weight="bold" fill="red" >not</tspan>  
+      </text>
+    </g>
+    </svg>
+    <svg x='420' y='10'  viewBox="0 0 200 200"  width="200" height="200" fill='none'>
+    <g font-family="Verdana" font-size="15" >
+      <text x="0" y="20" fill="blue"  >
+        Z:  <tspan id='zcd' font-weight="bold" fill="red" >not</tspan>  
+      </text>
+    </g>
+    </svg>
+
+	  <rect x='0' y='0' width='600' height='400' style="stroke: black;fill: blue; fill-opacity: 0.15;"/>
+    <svg x='0' y='0' id='unit_x'  width='600' height='400' style='overflow: hidden;' viewBox='0 -250 1200 250' preserveAspectRatio="none">
+    </svg>
+<rect id='jwlpl' x='0' y='0' width='0px' height='0px' style="stroke: black;fill: blue; fill-opacity: 0.4;"  >
+</rect>
+<script type="text/ecmascript"><![CDATA[
+moving=null;
+var last_w = 0;
+var node=null;
+gm=false;
+var x_r=[];
+var y_r=[];
+//function(){
+var g = document.getElementById("unit_x");
+var ary = g.getAttribute('viewBox').split(' ');
+x_r[0]=parseFloat(ary[0]);
+x_r[1]=parseFloat(ary[0]) + parseFloat(ary[2]);
+y_r[0]=parseFloat(ary[1]);
+y_r[1]=parseFloat(ary[1]) + parseFloat(ary[3]);
+
+//}();
+
+var data1 = "0,0, 1,-50.0, 2,-51.0, 3,-52.0, 4,-53.0, 5,-53.0, 6,-54.0, 7,-55.0, 8,-56.0, 9,-57.0, 10,-57.0, 11,-58.0, 12,-59.0, 13,-60.0, 14,-60.0, 15,-61.0, 16,-62.0, 17,-63.0, 18,-64.0, 19,-64.0 " +
+"20,-65.0, 21,-66.0, 22,-67.0, 23,-67.0, 24,-68.0, 25,-69.0, 26,-70.0, 27,-71.0, 28,-71.0, 29,-72.0, 30,-73.0, 31,-74.0, 32,-74.0, 33,-75.0, 34,-76.0, 35,-77.0, 36,-77.0, 37,-78.0, 38,-79.0 " +
+"39,-80.0, 40,-80.0, 41,-81.0, 42,-82.0, 43,-83.0, 44,-83.0, 45,-84.0, 46,-85.0, 47,-86.0, 48,-86.0, 49,-87.0, 50,-88.0, 51,-88.0, 52,-89.0, 53,-90.0, 54,-91.0, 55,-91.0, 56,-92.0, 57,-93.0 " +
+"58,-93.0, 59,-94.0, 60,-95.0, 61,-96.0, 62,-96.0, 63,-97.0, 64,-98.0, 65,-98.0, 66,-99.0, 67,-100.0, 68,-100.0, 69,-101.0, 70,-102.0, 71,-102.0, 72,-103.0, 73,-104.0, 74,-104.0, 75,-105.0, 76,-106.0 " +
+"77,-106.0, 78,-107.0, 79,-108.0, 80,-108.0, 81,-109.0, 82,-110.0, 83,-110.0, 84,-111.0, 85,-111.0, 86,-112.0, 87,-113.0, 88,-113.0, 89,-114.0, 90,-114.0, 91,-115.0, 92,-116.0, 93,-116.0, 94,-117.0, 95,-117.0 " +
+"96,-118.0, 97,-119.0, 98,-119.0, 99,-120.0, 100,-120.0, 101,-121.0, 102,-121.0, 103,-122.0, 104,-122.0, 105,-123.0, 106,-123.0, 107,-124.0, 108,-125.0, 109,-125.0, 110,-126.0, 111,-126.0, 112,-127.0, 113,-127.0, 114,-128.0 " +
+"115,-128.0, 116,-129.0, 117,-129.0, 118,-129.0, 119,-130.0, 120,-130.0, 121,-131.0, 122,-131.0, 123,-132.0, 124,-132.0, 125,-133.0, 126,-133.0, 127,-134.0, 128,-134.0, 129,-134.0, 130,-135.0, 131,-135.0, 132,-136.0, 133,-136.0 " +
+"134,-136.0, 135,-137.0, 136,-137.0, 137,-138.0, 138,-138.0, 139,-138.0, 140,-139.0, 141,-139.0, 142,-139.0, 143,-140.0, 144,-140.0, 145,-140.0, 146,-141.0, 147,-141.0, 148,-141.0, 149,-142.0, 150,-142.0, 151,-142.0, 152,-142.0 " +
+"153,-143.0, 154,-143.0, 155,-143.0, 156,-144.0, 157,-144.0, 158,-144.0, 159,-144.0, 160,-145.0, 161,-145.0, 162,-145.0, 163,-145.0, 164,-146.0, 165,-146.0, 166,-146.0, 167,-146.0, 168,-146.0, 169,-147.0, 170,-147.0, 171,-147.0 " +
+"172,-147.0, 173,-147.0, 174,-147.0, 175,-148.0, 176,-148.0, 177,-148.0, 178,-148.0, 179,-148.0, 180,-148.0, 181,-148.0, 182,-149.0, 183,-149.0, 184,-149.0, 185,-149.0, 186,-149.0, 187,-149.0, 188,-149.0, 189,-149.0, 190,-149.0 " +
+"191,-149.0, 192,-149.0, 193,-149.0, 194,-149.0, 195,-149.0, 196,-149.0, 197,-149.0, 198,-149.0, 199,-149.0, 200,-150.0, 201,-149.0, 202,-149.0, 203,-149.0, 204,-149.0, 205,-149.0, 206,-149.0, 207,-149.0, 208,-149.0, 209,-149.0 " +
+"210,-149.0, 211,-149.0, 212,-149.0, 213,-149.0, 214,-149.0, 215,-149.0, 216,-149.0, 217,-149.0, 218,-149.0, 219,-148.0, 220,-148.0, 221,-148.0, 222,-148.0, 223,-148.0, 224,-148.0, 225,-148.0, 226,-147.0, 227,-147.0, 228,-147.0 " +
+"229,-147.0, 230,-147.0, 231,-147.0, 232,-146.0, 233,-146.0, 234,-146.0, 235,-146.0, 236,-146.0, 237,-145.0, 238,-145.0, 239,-145.0, 240,-145.0, 241,-144.0, 242,-144.0, 243,-144.0, 244,-144.0, 245,-143.0, 246,-143.0, 247,-143.0 " +
+"248,-142.0, 249,-142.0, 250,-142.0, 251,-142.0, 252,-141.0, 253,-141.0, 254,-141.0, 255,-140.0, 256,-140.0, 257,-140.0, 258,-139.0, 259,-139.0, 260,-139.0, 261,-138.0, 262,-138.0, 263,-138.0, 264,-137.0, 265,-137.0, 266,-136.0 " +
+"267,-136.0, 268,-136.0, 269,-135.0, 270,-135.0, 271,-134.0, 272,-134.0, 273,-134.0, 274,-133.0, 275,-133.0, 276,-132.0, 277,-132.0, 278,-131.0, 279,-131.0, 280,-130.0, 281,-130.0, 282,-129.0, 283,-129.0, 284,-129.0, 285,-128.0 " +
+"286,-128.0, 287,-127.0, 288,-127.0, 289,-126.0, 290,-126.0, 291,-125.0, 292,-125.0, 293,-124.0, 294,-123.0, 295,-123.0, 296,-122.0, 297,-122.0, 298,-121.0, 299,-121.0, 300,-120.0, 301,-120.0, 302,-119.0, 303,-119.0, 304,-118.0 " +
+"305,-117.0, 306,-117.0, 307,-116.0, 308,-116.0, 309,-115.0, 310,-114.0, 311,-114.0, 312,-113.0, 313,-113.0, 314,-112.0, 315,-111.0, 316,-111.0, 317,-110.0, 318,-110.0, 319,-109.0, 320,-108.0, 321,-108.0, 322,-107.0, 323,-106.0 " +
+"324,-106.0, 325,-105.0, 326,-104.0, 327,-104.0, 328,-103.0, 329,-102.0, 330,-102.0, 331,-101.0, 332,-100.0, 333,-100.0, 334,-99.0, 335,-98.0, 336,-98.0, 337,-97.0, 338,-96.0, 339,-96.0, 340,-95.0, 341,-94.0, 342,-93.0 " +
+"343,-93.0, 344,-92.0, 345,-91.0, 346,-91.0, 347,-90.0, 348,-89.0, 349,-88.0, 350,-88.0, 351,-87.0, 352,-86.0, 353,-86.0, 354,-85.0, 355,-84.0, 356,-83.0, 357,-83.0, 358,-82.0, 359,-81.0, 360,-80.0, 361,-80.0 " +
+"362,-79.0, 363,-78.0, 364,-77.0, 365,-77.0, 366,-76.0, 367,-75.0, 368,-74.0, 369,-74.0, 370,-73.0, 371,-72.0, 372,-71.0, 373,-71.0, 374,-70.0, 375,-69.0, 376,-68.0, 377,-67.0, 378,-67.0, 379,-66.0, 380,-65.0 " +
+"381,-64.0, 382,-64.0, 383,-63.0, 384,-62.0, 385,-61.0, 386,-60.0, 387,-60.0, 388,-59.0, 389,-58.0, 390,-57.0, 391,-57.0, 392,-56.0, 393,-55.0, 394,-54.0, 395,-53.0, 396,-53.0, 397,-52.0, 398,-51.0, 399,-50.0 " +
+"400,-50.0, 401,0";
+
+var data2 = "0,0.0, 1,3.0, 2,6.0, 3,9.0, 4,12.0, 5,15.0, 6,18.0, 7,21.0, 8,24.0, 9,27.0, 10,30.0, 11,33.0, 12,36.0, 13,39.0, 14,42.0, 15,45.0, 16,48.0, 17,50.0, 18,53.0, 19,56.0, 20,58.0, 21,61.0, 22,63.0, 23,66.0, 24,68.0, 25,70.0, 26,72.0, 27,75.0, 28,77.0, 29,79.0, 30,80.0, 31,82.0, 32,84.0, 33,86.0, 34,87.0, 35,89.0, 36,90.0, 37,91.0, 38,92.0, 39,94.0, 40,95.0, 41,96.0, 42,96.0, 43,97.0, 44,98.0, 45,98.0, 46,99.0, 47,99.0, 48,99.0, 49,99.0, 50,100.0, 51,99.0, 52,99.0, 53,99.0, 54,99.0, 55,98.0, 56,98.0, 57,97.0, 58,96.0, 59,96.0, 60,95.0, 61,94.0, 62,92.0, 63,91.0, 64,90.0, 65,89.0, 66,87.0, 67,86.0, 68,84.0, 69,82.0, 70,80.0, 71,79.0, 72,77.0, 73,75.0, 74,72.0, 75,70.0, 76,68.0, 77,66.0, 78,63.0, 79,61.0, 80,58.0, 81,56.0, 82,53.0, 83,50.0, 84,48.0, 85,45.0, 86,42.0, 87,39.0, 88,36.0, 89,33.0, 90,30.0, 91,27.0, 92,24.0, 93,21.0, 94,18.0, 95,15.0, 96,12.0, 97,9.0, 98,6.0, 99,3.0, 100,0.0, 0,50.0, 1,53.0, 2,56.0, 3,59.0, 4,62.0, 5,65.0, 6,68.0, 7,71.0, 8,74.0, 9,77.0, 10,80.0, 11,83.0, 12,86.0, 13,89.0, 14,92.0, 15,95.0, 16,98.0, 17,100.0, 18,103.0, 19,106.0, 20,108.0, 21,111.0, 22,113.0, 23,116.0, 24,118.0, 25,120.0, 26,122.0, 27,125.0, 28,127.0, 29,129.0, 30,130.0, 31,132.0, 32,134.0, 33,136.0, 34,137.0, 35,139.0, 36,140.0, 37,141.0, 38,142.0, 39,144.0, 40,145.0, 41,146.0, 42,146.0, 43,147.0, 44,148.0, 45,148.0, 46,149.0, 47,149.0, 48,149.0, 49,149.0, 50,150.0, 51,149.0, 52,149.0, 53,149.0, 54,149.0, 55,148.0, 56,148.0, 57,147.0, 58,146.0, 59,146.0, 60,145.0, 61,144.0, 62,142.0, 63,141.0, 64,140.0, 65,139.0, 66,137.0, 67,136.0, 68,134.0, 69,132.0, 70,130.0, 71,129.0, 72,127.0, 73,125.0, 74,122.0, 75,120.0, 76,118.0, 77,116.0, 78,113.0, 79,111.0, 80,108.0, 81,106.0, 82,103.0, 83,100.0, 84,98.0, 85,95.0, 86,92.0, 87,89.0, 88,86.0, 89,83.0, 90,80.0, 91,77.0, 92,74.0, 93,71.0, 94,68.0, 95,65.0, 96,62.0, 97,59.0, 98,56.0, 99,53.0, 100,50.0 101,0.0"
+
+
+
+
+function xlbl(lab){lbl_g('x',lab)}
+function ylbl(lab){lbl_g('y',lab)}
+function zlbl(lab){lbl_g('z',lab)}
+function lbl_g(t,lab){
+    var lbl = document.getElementById(t + "cd");
+    //alert(lbl);
+    if(lbl.childNodes[0]){lbl.removeChild(lbl.childNodes[0])}
+    lbl.appendChild(document.createTextNode(lab)); 
+}
+
+function srt(a,b){return (a<b ? [a,b] : [b,a])}
+
+
+node=document.createElementNS('http://www.w3.org/2000/svg','polyline');
+var g = document.getElementById("unit_x");
+node.setAttribute('style','stroke: black;fill: red; fill-opacity: 0.3; stroke-width: 0.2;');
+node.setAttribute('points',data1);
+node.setAttribute('x',0);
+node.setAttribute('y',0);
+//node.y=-50;
+//node.setAttribute('transform','translate(0,-50)');
+node.id='gg_ui';
+g.appendChild(node);
+node=null;
+
+function srt(a,b){return (a<b ? [a,b] : [b,a])}
+
+function mv(evt){
+    try{
+    if(!moving){return}
+    var select_rect = document.getElementById("jwlpl");
+    var point1 = moving;
+    var point2 = [evt.clientX, evt.clientY]; 
+
+    var xs  = srt(point1[0],point2[0]);
+    var ys  = srt(point1[1],point2[1]);
+    var evtx = evt.clientX;
+    var evty = evt.clientY;
+
+    if(evtx <= xs[0]){
+      xs[0]=evtx;
+    }else{
+      xs[1]=evtx;
+    }
+    if(evty <= ys[0]){
+      ys[0]=evty;
+    }else{
+      ys[1]=evty;
+    }
+    //zlbl(xs);
+    xlbl(xs[0]);
+    //ylbl(xs[1]);
+    //ylbl([evt.clientX,evt.clientY]);
+    zlbl([evt.screenX,evt.screenY]);
+    select_rect.setAttribute('x',xs[0]);
+    select_rect.setAttribute('y',ys[0]);
+    select_rect.setAttribute('width',xs[1] - xs[0]);
+    select_rect.setAttribute('height',ys[1] - ys[0]);
+    return;
+    }catch(e){alert(e);}
+}
+
+
+function mouseup(evt){
+    moving=null;
+    if(!evt){return}
+    mv(evt);
+    var g = document.getElementById("unit_x");
+///    alert(g.getAttribute('viewBox'));
+    var g = document.getElementById("unit_x");
+    var g_x0 = document.getElementById("unit_x").getAttribute('viewBox').split(' ')[0];  
+    var g_y0 = document.getElementById("unit_x").getAttribute('viewBox').split(' ')[1];  
+    var g_width = document.getElementById("unit_x").getAttribute('viewBox').split(' ')[2];  
+    var g_height = document.getElementById("unit_x").getAttribute('viewBox').split(' ')[3]; 
+ 
+    var zb = document.getElementById("jwlpl");
+    ylbl([
+      g_x0,
+      g_y0,
+      g_width,
+      g_height,
+    ]);
+    xlbl([
+      (x_r[1]-x_r[0])*parseFloat(zb.getAttribute('x'))/g_width,
+      (x_r[1]-x_r[0])*(parseFloat(zb.getAttribute('x')) + parseFloat(zb.getAttribute('width')))/g_width,
+      -1.0*(y_r[1]-y_r[0])*(parseFloat(zb.getAttribute('y')) + parseFloat(zb.getAttribute('height')))/400,
+      -1.0*(y_r[1]-y_r[0])*parseFloat(zb.getAttribute('y'))/400,
+    ]);
+    pan_and_scan(
+      (x_r[1]-x_r[0])*parseFloat(zb.getAttribute('x'))/600,
+      (x_r[1]-x_r[0])*(parseFloat(zb.getAttribute('x')) + parseFloat(zb.getAttribute('width')))/600,
+      -1.0*(y_r[1]-y_r[0])*(parseFloat(zb.getAttribute('y')) + parseFloat(zb.getAttribute('height')))/400,
+      -1.0*(y_r[1]-y_r[0])*parseFloat(zb.getAttribute('y'))/400
+    );
+    zb.setAttribute('width',0);
+    zb.setAttribute('height',0);
+}
+
+function test_ps(){
+    pan_and_scan(0,400,-150,0);
+}
+
+function pan_and_scan(x1,x2,y1,y2){
+//alert([y1,y2]);
+    y2=0;
+    var total_time = 1;
+//    xlbl(x_r[0] + ' '+ x_r[1]  + ' ' + y_r[0]  + ' ' + y_r[1]);
+    ylbl(x1 + ' '+ x2  + ' ' + y1  + ' ' + y2);
+    var iterations=20;
+    var iz=1;
+    var x1d,x2d,y1d,y2d;
+
+    var g = document.getElementById("unit_x");
+//    xlbl(g.getAttribute('viewBox')); 
+    ylbl(x_r[0] + ' ' + y_r[0] +  ' ' + (x_r[1]-x_r[0]) + ' ' +  (y_r[1]-y_r[0])); 
+//    alert(x_r);
+//    alert(y_r);
+//return;
+    var f;
+    f  = function(){
+      var nx1 = (((x1-x_r[0])*iz/iterations)+x_r[0]);
+      var ny1 = (((y1-y_r[0])*iz/iterations)+y_r[0]);
+      var nx2 = (((x2-x_r[1])*iz/iterations)+x_r[1]);
+      var ny2 = (((y2-y_r[1])*iz/iterations)+y_r[1]);
+      //zlbl(y2);
+      ylbl( 
+        parseInt(nx1) + ' ' + 
+        parseInt(ny1) + ' ' + 
+        parseInt(nx2-nx1) + ' ' + 
+        parseInt(ny2-ny1)
+        
+      );
+
+      g.setAttribute('viewBox',
+        nx1 + ' ' + 
+        ny1 + ' ' + 
+        (nx2-nx1) + ' ' + 
+        (ny2-ny1)
+      );
+      zlbl(ny2-ny1);
+      if(iz>=iterations){return}
+      iz++;
+      window.setTimeout(f,50);
+    };
+    f();
+}
+
+
+function mousedown(evt){
+  zlbl('asdf');
+  moving=[evt.clientX,evt.clientY];
+  if(node){return} 
+  node = document.getElementById('gg_ui');
+  var rect = document.getElementById('tle');
+  rect.onmousemove=mv;
+  rect = document.getElementById('jwlpl');
+  rect.setAttribute('x',evt.clientX);
+  rect.setAttribute('y',evt.clientY);
+  rect.setAttribute('height',0);
+  rect.setAttribute('width',0);
+}
+
+
+
+]]></script>
+
+</svg>
+
